@@ -1,0 +1,56 @@
+\[
+  \begin{array}{ll@{}r@{}l}
+    	\min_{w, b, \varepsilon, \hat{\varepsilon_i}} & \frac{1}{2}||w||^{2} + C\sum_{i = 1}^{N}(\varepsilon_i + \hat{\varepsilon_i})\\[\jot]
+    	\text{s.t.}& \phantom{15}y_i \leq w^{T}x_i + b + \epsilon + \varepsilon_i \\
+    	&   \phantom{15}y_i \geq w^{T}x_i + b - \epsilon - \varepsilon_i \\
+	& \phantom{15}\varepsilon_i \geq 0 \\
+	& \phantom{15}\hat{\varepsilon_i} \geq 0\\
+	& \phantom{15} \forall i = 1...N
+  \end{array}
+\]
+\text{First of all, we need to change the constraints, thus obtaining:}
+\[
+  \begin{array}{ll@{}r@{}l}
+    	\min_{w, b, \varepsilon, \hat{\varepsilon_i}} & \frac{1}{2}||w||^{2} + C\sum_{i = 1}^{N}(\varepsilon_i + \hat{\varepsilon_i})\\[\jot]
+    	\text{s.t.}& \phantom{15}y_i - w^{T}x_i -  b - \epsilon - \varepsilon_i \leq 0\\
+    	& \phantom{15} -y_i + w^{T}x_i +  b - \epsilon - \varepsilon_i \leq 0\\
+	& \phantom{15} -\varepsilon_i \leq 0 \\
+	& \phantom{15}-\hat{\varepsilon_i} \leq 0\\
+	& \phantom{15} \forall i = 1...N
+  \end{array}
+\]
+\text{We need to introduce a Lagrange multiplier for each constraint we have: $\alpha$, $\beta$, $\gamma$, $\delta$.}\\
+\text{The lagrangian function is defined as follows:}
+\begin{multline*}
+\mathcal{L}(w, b, \varepsilon, \hat{\varepsilon}, \alpha, \beta, \gamma, \delta) =\\
+\frac{1}{2}||w||^{2}+ C\sum_{i=1}^{N}(\varepsilon_i + \hat{\varepsilon_i}) + \sum_{i = 1}^{N}\alpha_i(y_i - w^{T}x_i -  b - \epsilon - \varepsilon_i) \\
++ \sum_{i = 1}^{n}\beta_i( -y_i + w^{T}x_i +  b - \epsilon - \hat{\varepsilon_i})+ \sum_{i = 1}^{N}\gamma_i (-\varepsilon_i) + \sum_{i = 1}^{N}\delta_i(-\hat{\varepsilon_i}) 
+\end{multline*}
+\text{After this we need to calculate the gradient $\nabla\mathcal{L}(w, b, \varepsilon, \hat{\varepsilon}, \alpha, \beta, \gamma, \delta)$,}\\\text{ and in order to do so, we need to compute the partial derivate for each variable.}
+\begin{itemize}
+	\item $\frac{\partial\mathcal{L}}{\partial{w}} = w - \sum_{i = 1}^{N}\alpha_i x_i + \sum_{i = 1}^{N}\beta_ix_i$
+	\item $\frac{\partial\mathcal{L}}{\partial{b}} = - \sum_{i = 1}^{N}\alpha_i x_i + \sum_{i = 1}^{N}\beta_ix_i$
+	\item $\frac{\partial\mathcal{L}}{\partial{\varepsilon}} = C - \alpha - \gamma$ 
+	\item $\frac{\partial\mathcal{L}}{\partial{\hat{\varepsilon}}} = C - \beta - \delta$ 
+\end{itemize}
+\text{Setting $\nabla\mathcal{L}(w, b, \varepsilon, \hat{\varepsilon}, \alpha, \beta, \gamma, \delta) = 0$:}
+\begin{itemize}
+	\item $ w = \sum_{i = 1}^{N}\alpha_i x_i + \sum_{i = 1}^{N}\beta_ix_i$
+	\item $\frac{\partial\mathcal{L}}{\partial{b}} = \sum_{i = 1}^{N}\alpha_i x_i = \sum_{i = 1}^{N}\beta_ix_i$
+	\item $\frac{\partial\mathcal{L}}{\partial{\varepsilon}} = C = \alpha + \gamma$ 
+	\item $\frac{\partial\mathcal{L}}{\partial{\hat{\varepsilon}}} = C = \beta + \delta$ 
+\end{itemize}
+\text{If we substitute the newly found equations in the original one, we get:}
+\begin{equation*}
+-\frac{1}{2}\sum_{i = 1}^N(\alpha_i - \beta_i)\sum_{j = 1}^{N}(\alpha_j - \beta_j)x_i^Tx_j + \sum_{i = 1}^{N}y_i(\alpha_i - \beta_i) - \sum_{i = 1}^{N}\epsilon(\alpha_i + \beta_i)
+\end{equation*}
+\text{Finally, we can declare the dual problem with the new KKT constraints for soft SVM:}
+\[
+  \begin{array}{ll@{}r@{}l}
+    	 \max_{\alpha, \beta}& -\frac{1}{2}\sum_{i = 1}^N\sum_{j = 1}^{N}(\alpha_i - \beta_i)(\alpha_j - \beta_j)x_i^Tx_j + \sum_{i = 1}^{N}y_i(\alpha_i - \beta_i) - \sum_{i = 1}^{N}\epsilon(\alpha_i + \beta_i)\\[\jot]
+    	\text{s.t.}& \phantom{15}0 \geq \alpha_i \leq C, \forall i\\
+    	& \phantom{15} 0 \geq \beta_i \leq C, \forall i\\
+	& \phantom{15} \sum_{i = 1}^{N} \alpha_iy_i=  0 \\
+	& \phantom{15}\sum_{i = 1}^{N} \beta_iy_i=  0\\
+  \end{array}
+\]

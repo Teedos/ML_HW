@@ -1,0 +1,38 @@
+\begin{equation*}
+	\max_{w} \mathcal{L}(w)
+\end{equation*}
+\text{We know that the iterative formula is defined as: }
+\begin{equation*}
+	w_{t+1} = w_t - H^{-1} \nabla_w\mathcal{L}(w_t) 
+\end{equation*}
+\text{First of all, we need to find \textit{w}, such as $\nabla_w\mathcal{L}(w) = 0$ and the Hessian matrix}
+\begin{itemize}
+	\item $\nabla_w\mathcal{L}(w) = X(y - \mu)$
+	\item $H = - XRX^{T}$
+\end{itemize}
+\text{Note that $\mu_i = \psi(w^{T}_tx_i) = \frac{1}{1+exp(w^{T}_tx_i)}$}
+\text{and $\nabla_w \mu_i = \mu_i(1 - \mu_i) = R_{ii}$}
+
+\text{By substituting the above equations into the iterative formula we get:}
+\begin{equation*}
+	w_{t+1} = w_t - (XRX^{T})^{-1}X(y - \mu)
+\end{equation*}
+\begin{equation*}
+	w_{t+1} = (XRX^{T})^{-1}(XRX^{T}w_t - X(y-\mu))
+\end{equation*}
+\text{We can apply the same procedure for the L2-norm regularized logistic regression.}\\
+\text{Note that we already have the gradient of $\mathcal{L}(w)$}
+\begin{equation*}
+	\max_w -\frac{\lambda}{2}||w||_2^{2} + \mathcal{L}(w)
+\end{equation*}
+\begin{itemize}
+	\item $\nabla_w -\frac{\lambda}{2}||w||_2^{2} + \nabla_w\mathcal{L}(w) = -\lambda w + X(y - \mu)$
+	\item $H = \nabla_w^{2} -\frac{\lambda}{2}||w||_2^{2} + \nabla_w\mathcal{L}(w) = - \lambda - XRX^{T}$
+\end{itemize}
+\text{So the new update equation is defined as:}
+\begin{equation*}
+	w_{t+1} = w_t + (\lambda + XRX^{T})^{-1}(-\lambda w_t + X(y - \mu))
+\end{equation*}
+
+\text{This problem couldn't be solved due to an error during operation between matrix}\\
+\text{, thus preventing further experiments}

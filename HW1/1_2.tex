@@ -1,0 +1,24 @@
+\textbf{Solution}
+\text{We can divide our problem into two parts: }
+\begin{itemize}
+	\item {Get head first}
+	\item{Get \textit{k} consecutive tails}
+\end{itemize}
+\text{Let's start with calculating the expected tosses to get \textit{k} consecutive tails.}\\
+\text{Let \textit{$e$} be the number of expected tosses. The probability of getting tail is $p = \frac{1}{2}$,}\\\text{ if we get head first, then the expected number will be $\textit{e}+1$,}\\\text{ if we get head then tails, we will have $p=\frac{1}{2}\frac{1}{2} = \frac{1}{4}$ and $\textit{e}+2$ and so on until \textit{k}.}\\\text{ At last, we would need to consider the possibility of getting k tails in k tosses}\\
+\text{We can determine the number of tosses needed to get \textit{k} consecutive f with the following equation:}\\
+\begin{equation*}
+	e_k = \frac{1}{2}(e_k + 1) + \frac{1}{4}(e_k +2) + ..... + \frac{1}{2^{k}}(e_k + k) + \frac{1}{2^{k}}(k)
+\end{equation*}
+\text{The above equation can be simplified into:}
+\begin{equation*}
+	e_k = 2(2^{k}-1) = 2^(k+1) -2
+\end{equation*}
+\text{To get the expected number in order to get one head first,}\\\text{ we just need to set $\textit{k}= 1$ in the previous equation:}
+\begin{equation*}
+	e_1 = 2^{2} - 2 = 2
+\end{equation*}
+\text{The number of expected tosses in order to get one head and} \\\text{\textit{k} tails is simply the sum of the expected tosses for the two cases.}
+\begin{equation*}
+	e_k + e_1 = 2^{k+1} - 2 + 2 = 2^{k+1} 
+\end{equation*}

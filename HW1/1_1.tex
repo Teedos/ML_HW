@@ -1,0 +1,57 @@
+\[
+  \begin{array}{ll@{}r@{}l}
+    \text{min} & x_1^{2} + 12x_2^{2} - 1 \\[\jot]
+    \text{s.t.}& \phantom{15}\llap{3}x_1 +  x_2 - 1 = 0 \\
+    &    \phantom{15}x_1 - 2 x_2  \geq 0 \\
+  \end{array}
+\]
+
+\text{First of all, we need to change the last constraint equation, thus getting:}
+\[
+  \begin{array}{ll@{}r@{}l}
+    \text{min} & x_1^{2} + 12x_2^{2} - 1 = f(x_1, x_2)\\[\jot]
+    \text{s.t.}& \phantom{15}\llap{3}x_1 +  x_2 - 1 = 0 = g(x_1, x_2) \\
+    &    \phantom{15}2 x_2 - x_1  \leq 0 = h(x_1, x_2)\\
+  \end{array}
+\]
+\text{Solution}
+\[
+  \begin{array}{l}
+    \mathcal{L}(x_1, x_2, \lambda_1, \lambda_2) = x_1^{2} + x_2^{2} + \lambda_1(x_1 + x_2 - 1) + \lambda_2(2x_2 - x_1) \\[\jot]
+     \phantom{15}\mathcal{L}x_1 = 2x_1 + \lambda_1 - \lambda_2 = 0 \\
+     \phantom{15}\mathcal{L}x_2 = 2x_2 + \lambda_1 + 2\lambda_2 = 0 \\		
+     \phantom{15}\mathcal{L}\lambda_1 = x_1 + x_2 -1 = 0 \\
+     \phantom{15}\mathcal{L}\lambda_2= 2x_2 + x_1 = 0 \\
+  \end{array}
+\]
+\text{substitute $x_1$ and $x_2$}
+\[
+  \begin{array}{l}
+     x_1 = \frac{\lambda_2}{2} - \frac{\lambda_1}{2}\\[\jot]
+     x_2 = - \lambda_2 - \frac{\lambda_2}{2} \\
+     \mathcal{L}\lambda_1 =\frac{-\lambda2 - 2\lambda_1}{2} -1 =   \\
+      = \frac{-\lambda_2}{2} = 1 + \frac{2\lambda_1}{2} = -2 -2\lambda_1\\
+     \text{substitute $\lambda_1$}\\
+     \mathcal{L}\lambda_2 = 4 + 4\lambda_1 - \lambda_1 + 1 + \lambda_1 + \frac{\lambda_1}{2} =\\
+     = 5 + 4\lambda_1 + \frac{\lambda_1}{2} = \frac{-10}{9}\\
+    	
+  \end{array}
+\]
+\text{In the end we have:}
+\[
+	\begin{array}{l}
+		 \lambda_1 = \frac{-10}{9}\\\\
+   		 \lambda_2 = \frac{2}{9}\\\\
+   		 x_1 = \frac{2}{3}\\\\
+   		 x_2 = \frac{1}{3}
+	\end{array}
+\]
+\text{We can verify the limitations by inserting the values of $x_1$ and $x_2$:}
+
+\[
+	\begin{array}{l}
+		 g(x_1, x_2) = \frac{2}{3} + \frac{1}{3} - 1 = 0\\\\
+   		 h(x_1, x_2) = 2\frac{1}{3} - (\frac{2}{3})= 0\\\\
+		f(x_1, x_2) = \frac{2}{3}^{2} + \frac{1}{3}^{2} -1 = \frac{4+1-9}{9} = \frac{-4}{9} 
+	\end{array}
+\]
