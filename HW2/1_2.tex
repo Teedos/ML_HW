@@ -1,0 +1,53 @@
+\begin{equation*}
+	\frac{1}{N}\sum_{i=1}^{N}I(y_i\neq F(x_i)) \leq \prod_{t=1}^{T}\sqrt{1 - 4\gamma^2_t}
+\end{equation*}
+We know that the $0-1$ loss is upper bounded by the exponential loss, i.e.
+ \begin{equation*}
+	I(y_i\neq F(x_i)) \leq exp(-y_if_T(x_i)) 
+\end{equation*}
+We can continue with:
+\begin{equation*}
+	\frac{1}{N}\sum_{i=1}^{N}I(y_i\neq F(x_i)) \leq \frac{1}{N}\sum_{i=1}^{N} exp(-y_if_T(x_i)) 
+\end{equation*}
+\begin{equation*}
+	 \frac{1}{N}\sum_{i=1}^{N} exp(-y_if_T(x_i)) =  \frac{1}{N}\sum_{i=1}^{N} exp(-y_i\sum_{t=1}^{T}\beta_th_t(x_i)) 
+\end{equation*}
+\begin{equation*}
+	 =  \frac{1}{N}\sum_{i=1}^{N} \prod_{t=1}^{T}exp(-y_i\beta_th_t(x_i)) 
+\end{equation*}
+The AdaBoost algorithm states that:
+\begin{equation*}
+	D_{t+1} = \frac{D_t(i)exp(-\beta_ty_ih_t(x_i))}{Z_t}
+\end{equation*}
+So we have:
+\begin{equation*}
+	\frac{1}{N}\sum_{i=1}^{N} \prod_{t=1}^{T}exp(-y_i\beta_th_t(x_i)) = \frac{1}{N}\sum_{i=1}^{N} \prod_{t=1}^{T}Z_t\frac{D_{t+1}(i)}{D_t(i)}
+\end{equation*}
+\begin{equation*}
+	= \frac{1}{N}\sum_{i=1}^{N} \prod_{t=1}^{T}Z_t\frac{D_{t+1}(i)}{D_1(i)}
+\end{equation*}
+We remember that $D_1(i) = \frac{1}{N}$ and due to the normalization, $\sum_{i=1}^{N}D_{t+1} =1$ , in the end we have:
+\begin{equation*}
+	\frac{1}{N}\sum_{i=1}^{N} \prod_{t=1}^{T}exp(-y_i\beta_th_t(x_i)) = \prod_{t=1}^{T} Z_t
+\end{equation*}
+Let's now find the value of $Z_t$:
+\begin{equation*}
+	Z_t = \sum_{i=1}^{N}D_t(i)exp(-y_i\beta_t h_t(x_i))
+\end{equation*} 
+\begin{equation*}
+	= \sum_{i:y_i=h_t(x_i)}D_t(i)exp(-\beta_t) +  \sum_{i:y_i\neq h_t(x_i)}D_t(i)exp(\beta_t)
+\end{equation*} 
+\begin{equation*}
+	= exp(-\beta_t) (1 - \epsilon_t) + exp(\beta_t)\epsilon_t
+\end{equation*} 
+By solving the above equation, we can find that $\beta_t = \frac{1}{2}ln\frac{1-\epsilon_t}{\epsilon_t}$, and note that $\epsilon_t = \frac{1}{2} - \gamma$ (stated in the hypothesys):
+\begin{equation*}
+	= exp(-( \frac{1}{2}ln\frac{1-\epsilon_t}{\epsilon_t}))(\frac{1}{2}+\gamma_t) + exp( \frac{1}{2}ln\frac{1-\epsilon_t}{\epsilon_t})(\frac{1}{2}-\gamma_t)
+\end{equation*} 
+\begin{equation*}
+	= \sqrt{1-4\gamma_t^2}
+\end{equation*}
+Based on the above results, we have proved that:
+\begin{equation*}
+	\frac{1}{N}\sum_{i=1}^{N}I(y_i\neq F(x_i)) \leq \prod_{t=1}^{T}\sqrt{1 - 4\gamma^2_t}
+\end{equation*}

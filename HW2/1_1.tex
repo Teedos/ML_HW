@@ -1,0 +1,21 @@
+\begin{equation*}
+	\mathcal{L}(f) := \sum_{i=1}^{N} exp(-y_if(x_i))
+\end{equation*}
+We can prove that AdaBoost is equivalent to stagewise minimization of the above exponential loss by using a greedy approach with additive models.\\
+We can consider a binary classifier described as follows:
+\begin{equation}
+	f (x)= sign(\sum_{t=1}^{N} \beta_th_t(x))
+\end{equation}
+We need to calculate the empirical error minimization by solving the optimization problem:
+\begin{equation*}
+	\min_{\beta_t,h_t} \sum_{i = 1}^{n}\mathcal{L}(\sum_{t =1}^{N}\beta_th_t(x_i)y_i)
+\end{equation*}
+Because it is not realistic to optimize $\beta_1....\beta_t$ and $h_1....h_t$, we can use a greedy approach.
+We can add a classifier to be optimized at each stage of the algorithm (\textbf{stage wise learning of additive models}). Given equation 1, for each \text{t} we have:
+\begin{equation*}
+	f_t(x)= \sum_{i=1}^{t} \beta_ih_i(x)) = f_{t-1}(x) + \beta_th_t(x)
+\end{equation*}
+With the greedy approach, at each stage \textit{t} we have already learnt \textit{$t-1$} classifiers and we leave them as they are, so the problem reduces to find the optimal values of $\beta_t$ and $h_t$. So in the end we have:
+\begin{equation*}
+	(\beta_t, h_t) = arg \min_{\beta>=0,h}\sum_{i=1}^{N}exp(-y_i(f_{t_1}(x_i) + \beta h(x_i))
+\end{equation*}
