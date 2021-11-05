@@ -1,0 +1,44 @@
+$x_i^{l-1}$ being symmetric means that the distribution is an even function, so we have:
+\begin{equation*}
+	E[\sigma(x_i^{l-1})^2] = \frac{1}{2}E[(x_i^{l-1})^2] 
+\end{equation*}
+\begin{equation*}
+	\frac{1}{2}E[(x_i^{l-1})^2] = \frac{1}{2}(var(x_i^{l-1}) + E[x_i^{l-1}]^2)
+\end{equation*}
+Note that the mean $E[x_i^{l-1}] = 0, \forall l$, we have:
+\begin{equation}\label{id}
+	E[\sigma(x_i^{l-1})^2] = \frac{1}{2}var(x_i^{l-1}) 
+\end{equation}
+We can now proceed to prove that:
+\begin{equation*}
+	var(x_i^l) = \sum_{j=1}^{N_{l-1}}(var(W_{ij}^l)var\sigma(x_j^{l-1}) + var(W_{ij}^l)E[\sigma(x_j^{l-1})]^2))
+\end{equation*}
+\begin{equation*}
+	= \sum_{j=1}^{N_{l-1}}(var(W_{ij}^l)(E[\sigma(x_j^{l-1})^2] - E[\sigma(x_j^{l-1})^2])+ var(W_{ij}^l)E[\sigma(x_j^{l-1})]^2))
+\end{equation*}
+\begin{equation*}
+	= \sum_{j=1}^{N_{l-1}}(var(W_{ij}^l)E[\sigma(x_j^{l-1})]^2))
+\end{equation*}
+\begin{equation*}
+	= N^{l-1}var(W_{ij}^l)E[\sigma(x_j^{l-1})]^2
+\end{equation*}
+Based on \ref{id}, we have:
+\begin{equation*}
+	var(x_i^l) = N^{l-1}var(W_{ij}^l)\frac{1}{2}var(x_i^{l-1})
+\end{equation*}
+In order for the variance of the network output to not explode or vanish, the mean and variance of the activations in layer l  and $l-1$ must be "equal", which means that $var(x_i^l) = var{x_j^{l-1}}$. To prove this, we must achieve $\frac{1}{2}N^{-1}var(W_{ij}^{l}) = 1$:
+\begin{equation*}
+	var(W_{ij}^l) = \frac{2}{N^{l-1} }
+\end{equation*}
+\begin{equation*}
+	var(x_i^l) = \frac{1}{2}\frac{2}{N^{l-1}}N^{l-1}var(x_i^{l-1})
+\end{equation*}
+Thus finally proving that:
+\begin{equation*}
+	var(x_i^l) = var(x_i^{l-1})
+\end{equation*}
+We know that the standard deviation is just the square root of the variance:
+\begin{equation*}
+	\sigma_l = \sqrt(\frac{2}{N^{l-1}}) = \frac{\sqrt2}{\sqrt{N^{l-1}}}
+\end{equation*}
+So $\alpha = \sqrt2$

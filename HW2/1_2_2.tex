@@ -1,0 +1,33 @@
+ \begin{equation*}
+	\prod_{t=1}^{T} Z_t =\prod_{t=1}^{T} \sqrt{1-4\gamma_t^2}
+\end{equation*}
+The predictive function is:
+\begin{equation*}
+	f_pred = \frac{f_T}{\prod_{t=1}^{T} \beta_t}
+\end{equation*}
+$yf(x) \leq \theta$ means that:
+\begin{equation*}
+	y\sum_{t=1}^{T}\beta_th_t(x) \leq \theta\sum_{t=1}^{T}\beta_t
+\end{equation*}
+which is true if and only if:
+\begin{equation*}
+	I(yf(x) \leq \theta) \leq exp(-y \sum_{t=1}^{T} \beta_th_t(x) + \theta\sum_{t=1}^{T}\beta_t)
+\end{equation*}
+Having said that:
+\begin{equation*}
+	\frac{1}{N}\sum_{i=1}^{N}I(y_if_T(x_i) \leq \theta) \leq \frac{1}{N} \sum_{i=1}^{N} exp(-y \sum_{t=1}^{T} \beta_th_t(x) + \theta\sum_{t=1}^{T}\beta_t()
+\end{equation*}
+\begin{equation*}
+	= \frac{exp(\theta\sum_{t=1}^{T}\beta_t)}{N} \sum_{i=1}^{N} exp(-y \sum_{t=1}^{T} \beta_th_t(x) + \theta\sum_{t=1}^{T}\beta_t()
+\end{equation*}
+\begin{equation*}
+	= exp(\theta\sum_{t=1}^{T}\beta_t)(\prod_{t=1}^{T} Z_t)
+\end{equation*}
+Because we are considering a simplified case, we can ignore $\sum_{t=1}^{T}\beta_t$, thus getting:
+\begin{equation*}
+	= exp(\theta)(\prod_{t=1}^{T} Z_t)
+\end{equation*}
+This proves that the training error at margin $\theta$ satisfies:
+\begin{equation*}
+	\frac{1}{N}\sum_{i=1}^{N}I(y_if_T(x_i) \leq \theta) \leq exp(\theta)(\prod_{t=1}^{T} Z_t)
+\end{equation*}
