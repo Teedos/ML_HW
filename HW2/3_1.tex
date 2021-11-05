@@ -1,0 +1,42 @@
+\begin{equation*}
+	P(x|\mu) = \frac{n!}{\prod_ix_i!}\prod_i\mu_i^{x_i} , i = 1...d
+\end{equation*}
+where$ x_i \in \mathbb{N}, \sum_{i}x_i = n$ and $0 < \mu_i < 1, \sum_{i}\mu_i = 1$.\\
+The log-likelihood is:
+\begin{equation*}
+	l(P(x|\mu)) = log(\frac{n!}{\prod_ix_i!}\prod_i\mu_i^{x_i} )
+\end{equation*}
+\begin{equation*}
+	= logn!  + \sum_{i=1}x_ilog\mu_i - \sum_{i=1}logx_i!
+\end{equation*}
+Now we can proceed with the lagrange multiplier:
+\begin{equation*}
+	\mathcal{L}(\mu,\lambda) = l(P(x|\mu)) + \lambda(1 - \sum_{i=1}\mu_i)
+\end{equation*}
+Now we need to set the partial derivates to 0:
+\begin{equation*}
+	\frac{\partial}{\partial\mu_i}\mathcal{L}(\mu,\lambda) =  \frac{\partial}{\partial\mu_i}  l(P(x|\mu)) + \frac{\partial}{\partial\mu_i}(1 - \sum_{i=1}\mu_i) = 0
+\end{equation*}
+\begin{equation*}
+	\frac{\partial}{\partial\mu_i} \sum_{i=1}x_ilog\mu_i -\lambda \frac{\partial}{\partial\mu_i}(\sum_{i=1}\mu_i) = 0
+\end{equation*}
+\begin{equation*}
+	\frac{x_i}{\mu_i} - \lambda = 0 
+\end{equation*}
+\begin{equation*}
+	\mu_i = \frac{x_i}{\lambda}
+\end{equation*}
+The value of $\lambda$ is:
+\begin{equation*}
+	\sum_{i=1}\mu_i = \sum_{i=1}\frac{x_i}{\lambda}
+\end{equation*}
+\begin{equation*}
+	1 = \frac{1}{\lambda} \sum_{i = 1}x_i
+\end{equation*}
+\begin{equation*}
+	\lambda = n
+\end{equation*}
+So, in the end we have:
+\begin{equation*}
+	\mu_i = \frac{x_i}{n}
+\end{equation*}

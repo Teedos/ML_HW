@@ -1,0 +1,26 @@
+\begin{equation}\label{2_2}
+	\frac{\partial Loss(W)}{\partial x_i^l} = W^l \frac{\partial Loss(W)}{\partial y_i^l}
+\end{equation}
+In back propagation we have $\frac{\partial Loss(W)}{\partial y_i^l} = f'(y^l)\frac{\partial Loss(W)}{x_i^{l+1}}$.\\
+In case of the ReLu activation, $f'(y_i^l) = 0$ or 1, and because they are independent, we have:
+\begin{equation*}
+	E[\frac{\partial Loss(W)}{\partial y_i^l}] = \frac{1}{2}E[\frac{\partial Loss(W)}{x_i^{l+1}}] = 0
+\end{equation*}
+\begin{equation*}
+	E[(\frac{\partial Loss(W)}{\partial y_i^l})^2] = \frac{1}{2}var(\frac{\partial Loss(W)}{x_i^{l+1}})
+\end{equation*}
+By applying the above equations on \ref{2_2}, we get:
+\begin{equation*}
+	var(\frac{\partial Loss(W)}{\partial x_i^l}) = \frac{1}{2}N^lvar(W^l)var(\frac{\partial Loss(W)}{x_i^{l+1}})
+\end{equation*}
+A sufficient condition for the gradient to not explode or vanish is:
+\begin{equation*}
+	var(W_{ij}^l) = \frac{2}{N^{l}}
+\end{equation*}
+Thus getting:
+\begin{equation*}
+	var(\frac{\partial Loss(W)}{\partial x_i^l}) =  \frac{2}{N^{l}}\frac{1}{2}N^lvar(\frac{\partial Loss(W)}{\partial x_i^{l+1}})
+\end{equation*}
+ \begin{equation*}
+	var(\frac{\partial Loss(W)}{\partial x_i^l}) =var(\frac{\partial Loss(W)}{\partial x_i^{l+1}})
+\end{equation*}

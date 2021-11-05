@@ -1,9 +1,0 @@
-\text{Several tests have been ran in order to get a possible best run configuration for the spiral set.}
-\begin{itemize}
-	\item \textbf{features}\text{: features have been added one by one to observe the behavior of the network.}\\\text{ I have observed that with the spiral database, the \textit{sin} function is the most adept.}\\\text{ The chosen features are: X1, X2, sin(X1), sin(X2)}
-	\item \textbf{neurons per layer} \text{: 5 neurons per layer}
-	\item \textbf{hidden layers} \text{: after multiple test runs, I found out that with 2 hidden layers,}\\\text{ the network was able to keep the loss extremely low and allowed faster convergence speed.}\\\text{ Using 3 layers actually made the loss rate more unstable}
-	\item \textbf{learning rate} \text{: the fastest convergence speed has been achieved selecting a learning rate of 0.1}
-	\item \textbf{activation function}\text{: the function that gives the fastest convergence speed is \textit{tanh}}
-	\item \textbf{regularization}\text{: introducing regularization actually worsened the error values,}\\ \text{so in the end, I chose to go without regularization}
-\end{itemize}
