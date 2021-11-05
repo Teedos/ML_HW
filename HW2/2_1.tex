@@ -1,5 +1,12 @@
 $x_i^{l-1}$ being symmetric means that the distribution is an even function, so we have:
 \begin{equation*}
+	E[\sigma(x_i^{l-1})^2] = \int_{-\inf}^{\inf}\sigma(x_i^l)^2f(x_i^l)x_i^l + \int_{-\inf}^{inf}\sigma(x_i^l)^2f(x_i^l)x_i^l
+\end{equation*}
+Given the property of the ReLu function:
+\begin{equation*}
+	= \int_{-\inf}^{0}0 + \int_{-\inf}^{inf}\sigma(x_i^l)^2f(x_i^l)x_i^l
+\end{equation*}
+\begin{equation*}
 	E[\sigma(x_i^{l-1})^2] = \frac{1}{2}E[(x_i^{l-1})^2] 
 \end{equation*}
 \begin{equation*}
