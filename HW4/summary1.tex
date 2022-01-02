@@ -1,0 +1,29 @@
+\section*{Summary of \textit{Semi-supervised classification with graph convolutional network}}
+\subsection*{Introduction}
+This paper introduces a scalable approach for semi-supervised learning on graph-structured data based on a variant of cnn that operate directly on graphs.\\
+This particular model scales linearly in the number of edges and learns hidden layers representations that encode the local graph structure and feature of the nodes.\\
+Classifying nodes in a graph where only a handful of nodes has access to labels can be looked at as a graph based semi-supervised learning problem where labels are smoothed via Laplacian regularization term in the loss function.\\
+Below is the function:
+\begin{equation*}
+	\mathcal{L} = \mathcal{L}_0 + \lambda\mathcal{L}_{reg}
+\end{equation*}
+with:
+\begin{itemize}
+	\item \begin{equation*}\mathcal{L}_{reg} = \sum_{i,j} A_{i,j} \lVert f(X_i)-f(X_j) \rVert^2 = f(X)^T\Delta f(X)\end{equation*}
+	\item $\mathcal{L}_0$ is the supervised loss.
+	\item f can be a neural network-like differentiable function.
+	\item $\lambda$ is a weighting factor.
+	\item X represents the matrix of note feature vectors.
+	\item A is an adjacency matrix.
+	\item D is a degree matrix.
+	\item $\Delta = D - A $ 
+\end{itemize}
+In this paper the graph structure is encoded as f(X, A) and trained on a supervised target $\mathcal{L}_0$ for all nodes who have access to labels. By doing so it is possible to aboid explicit regularization in the loss function.\\
+The f function allows the model to distribute gradient information from $\mathcal{L}_0$ and enables it to learn representation of all the nodes.\\
+The work can be divided into two parts:
+\begin{enumerate}
+	\item show that it is possible to use a first-oder approximation of spectral graph convolutions.
+	\item demonstrate that this kind of graph based model can be used for semi-supervised classification of graph nodes.
+\end{enumerate}
+\subsection*{Spectral graph convolutions}
+They consider spectral convolutions defined as:
